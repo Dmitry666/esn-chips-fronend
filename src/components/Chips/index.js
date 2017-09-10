@@ -1,39 +1,71 @@
 // src/components/Chips/index.js
 import React, { Component } from 'react';
-import Slider from 'react-slick';
+//import Slider from 'react-slick';
+import Slider from 'react-image-slider';
+
+//import Service from '../../service/service';
 
 import classnames from 'classnames';
 
 import './style.css';
-
+import '../../../node_modules/react-image-slider/lib/image-slider.css'
 export default class Chips extends Component {
   // static propTypes = {}
   // static defaultProps = {}
   // state = {}
-  render() {
-    const { className, ...props } = this.props;
-    var settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      chips: []
     };
 
+    var request = require('request');
+    request('http://localhost:5656/chips', (error, response, body) => {
+      console.log('error:', error); // Print the error if one occurred 
+      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
+      console.log('body:', body); // Print the HTML for the Google homepage.
+
+      let chips = JSON.parse(body);
+      this.updateChipsList(chips);
+    });
+  }
+
+  updateChipsList(chips) {
+
+    this.setState({
+      chips: chips
+    });
+  }
+
+  render() {
+    const { className, ...props } = this.props;
+
+    let chips = this.state.chips;
+
+    let images = []
+    for (let chip of chips) {
+      let icon = chip.icon;
+      console.log('icon:', icon);
+      images.push(icon);
+    }
+    console.log('images:', images);
+/*
+    const images = [
+      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
+      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
+      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
+      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
+      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
+      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
+      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
+    ];
+*/
     return (
-      <div className={classnames('Chips', className)} {...props}>
-        <h1>
-          Chips
-        </h1>
-        <Slider {...settings}>
-          <div><h3>1</h3></div>
-          <div><h3>2</h3></div>
-          <div><h3>3</h3></div>
-          <div><h3>4</h3></div>
-          <div><h3>5</h3></div>
-          <div><h3>6</h3></div>
-        </Slider>
-      </div>
+      <Slider images={images} isInfinite delay={5000}>
+        {images.map((image, key) => <div key={key}><img src={image} /></div>)}
+      </Slider>
     );
   }
 }
