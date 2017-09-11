@@ -15,6 +15,7 @@ export default class Home extends Component {
     const { className, ...props } = this.props;
     return (
       <div className={classnames('Home', className)} {...props}>
+        <Dino />
         <Chips />
       </div>
     );
