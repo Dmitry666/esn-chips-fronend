@@ -4,7 +4,10 @@ import classnames from 'classnames';
 
 import './style.css';
 
+import Dino from '../../components/Dino';
 import Chips from '../../components/Chips';
+import AddFood from '../../components/AddFood';
+
 
 export default class Home extends Component {
   // static propTypes = {}
@@ -17,6 +20,7 @@ export default class Home extends Component {
       <div className={classnames('Home', className)} {...props}>
         <Dino />
         <Chips />
+        <AddFood />
       </div>
     );
   }

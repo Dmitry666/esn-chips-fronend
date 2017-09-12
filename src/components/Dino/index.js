@@ -2,6 +2,11 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
+
+import background from './background.png';
+import dino from './dino.png';
+import foreground from './foreground.png';
+
 import './style.css';
 
 export default class Dino extends Component {
@@ -25,13 +30,16 @@ export default class Dino extends Component {
       console.log('body:', body); // Print the HTML for the Google homepage.
 
       let dinos = JSON.parse(body);
-      let dino = dinos[0];
 
-      let angry = dino.angry;
-      let hungry = dino.hungry;
-      let sleep = dino.hungry;
+      if(dinos.count > 0) {
+        let dino = dinos[0];
 
-      this.updateDino(angry, hungry, sleep);
+        let angry = dino.angry;
+        let hungry = dino.hungry;
+        let sleep = dino.hungry;
+
+        this.updateDino(angry, hungry, sleep);
+      }
     });
   }
 
@@ -52,7 +60,7 @@ export default class Dino extends Component {
     let sleep = this.state.sleep;
 
     return (
-      <div className={classnames('Home', className)} {...props}>
+      <div className={classnames('Dino', className)} {...props}>
         {angry} {hungry} {sleep}
       </div>
     );

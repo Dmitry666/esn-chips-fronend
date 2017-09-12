@@ -1,6 +1,6 @@
 // src/components/About/index.js
 import React, { Component } from 'react';
-//import classnames from 'classnames';
+import classnames from 'classnames';
 
 import './style.css';
 
@@ -14,7 +14,7 @@ export default class Header extends Component {
   render() {
     const { className, ...props } = this.props;
     return (
-      <header>
+      <header className={classnames('Header', className)} {...props}>
         <nav>
           <ul>
             <li><Link to='/'>Home</Link></li>
