@@ -15,8 +15,8 @@ export default class Header extends Component {
     const { className, ...props } = this.props;
     return (
       <header className={classnames('Header', className)} {...props}>
-        <nav>
-          <ul>
+        <nav className={classnames('container', className)}>
+          <ul className={classnames('navigation', className)}>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/about'>About</Link></li>
             <li><Link to='/notFound'>NotFound</Link></li>
