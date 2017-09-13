@@ -4,7 +4,12 @@ import classnames from 'classnames';
 
 
 import background from './background.png';
+import backgroundNight from './background_night.png';
+
+
 import dino from './dino.png';
+import dinoAngry from './dino_angry.png';
+
 import foreground from './foreground.png';
 
 import './style.css';
@@ -36,7 +41,7 @@ export default class Dino extends Component {
 
         let angry = dino.angry;
         let hungry = dino.hungry;
-        let sleep = dino.hungry;
+        let sleep = dino.sleep;
 
         this.updateDino(angry, hungry, sleep);
       }
@@ -59,9 +64,15 @@ export default class Dino extends Component {
     let hungry = this.state.hungry;
     let sleep = this.state.sleep;
 
+    let backgroundImg = sleep > 0.5 ? backgroundNight : background;
+    let dinoImg = angry > 0.5 ? dinoAngry : dino;
+
     return (
       <div className={classnames('Dino', className)} {...props}>
         {angry} {hungry} {sleep}
+        <img src={backgroundImg} alt="background" />
+        <img src={dinoImg} alt="dino" />
+        <img src={foreground} alt="foreground" />
       </div>
     );
   }
