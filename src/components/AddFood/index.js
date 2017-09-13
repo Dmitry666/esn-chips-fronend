@@ -4,7 +4,8 @@ import classnames from 'classnames';
 
 import './style.css';
 
-//import MyUploader from 'MyUploader';
+import MyUploader from './MyUploader/MyUploader';
+
 // <MyUploader />
 export default class AddFood extends Component {
   // static propTypes = {}
@@ -15,7 +16,7 @@ export default class AddFood extends Component {
     const { className, ...props } = this.props;
     return (
       <div className={classnames('AddFood', className)} {...props}>
-        
+        <MyUploader />
       </div>
     );
   }

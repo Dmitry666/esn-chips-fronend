@@ -51,17 +51,7 @@ export default class Chips extends Component {
       images.push(icon);
     }
     console.log('images:', images);
-/*
-    const images = [
-      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
-      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
-      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
-      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
-      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
-      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
-      'http://www.fritolay.com/images/default-source/blue-bag-image/lays-classic.png?sfvrsn=bd1e563a_2',
-    ];
-*/
+
     return (
       <Slider images={images} isInfinite delay={5000}>
         {images.map((image, key) => <div key={key}><img src={image} /></div>)}

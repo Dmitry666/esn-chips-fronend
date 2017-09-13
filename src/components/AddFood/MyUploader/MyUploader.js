@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
 
-import ImagesUploader from 'react-images-uploader';
-
-import 'react-images-uploader/styles.css';
-import 'react-images-uploader/font.css';
+import ImageUploader from 'react-images-upload';
  
 export default class MyUploader extends Component {
+
+    constructor(props) {
+        super(props);
+         this.state = { pictures: [] };
+         this.onDrop = this.onDrop.bind(this);
+    }
+ 
+    onDrop(picture) {
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
+    }
+    
     render() {
         return (
-            <ImagesUploader
-                url="http://localhost:9090/notmultiple"
-                optimisticPreviews
-                multiple={false}
-                onLoadEnd={(err) => {
-                    if (err) {
-                        console.error(err);
-                    }
-                }}
-                label="Upload a picture"
-                />
+            <ImageUploader
+                withIcon={true}
+                buttonText='Choose images'
+                onChange={this.onDrop}
+                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                maxFileSize={5242880}
+            />
         );
     }
 }
