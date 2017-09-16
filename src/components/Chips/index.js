@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 //import Slider from 'react-slick';
 import Slider from 'react-image-slider';
+import { Draggable, Droppable } from 'react-drag-and-drop'
 
 //import Service from '../../service/service';
 
@@ -53,9 +54,11 @@ export default class Chips extends Component {
     console.log('images:', images);
 
     return (
-      <Slider images={images} isInfinite delay={5000}>
-        {images.map((image, key) => <div key={key}><img src={image} /></div>)}
-      </Slider>
+      <div className={classnames('Chips', className)} {...props}>
+        <Slider images={images} isInfinite delay={5000}>
+          {images.map((image, key) => <Draggable type="food" data="chip"><div className={classnames('ImageContainer', className)} key={key}><img src={image} /></div></Draggable>)}
+        </Slider>
+      </div>
     );
   }
 }

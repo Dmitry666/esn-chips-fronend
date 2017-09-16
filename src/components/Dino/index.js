@@ -1,5 +1,8 @@
 // src/components/NotFound/index.js
 import React, { Component } from 'react';
+
+import { Draggable, Droppable } from 'react-drag-and-drop'
+
 import classnames from 'classnames';
 
 
@@ -57,6 +60,11 @@ export default class Dino extends Component {
     });
   }
 
+  onDrop(data) {
+      console.log(data)
+      // => banana  
+  }
+
   render() {
     const { className, ...props } = this.props;
 
@@ -68,11 +76,25 @@ export default class Dino extends Component {
     let dinoImg = angry > 0.5 ? dinoAngry : dino;
 
     return (
-      <div className={classnames('Dino', className)} {...props}>
-        {angry} {hungry} {sleep}
-        <img src={backgroundImg} alt="background" />
-        <img src={dinoImg} alt="dino" />
-        <img src={foreground} alt="foreground" />
+      <div className={classnames('Body', className)} {...props}>   
+        <div className={classnames('Dino', className)}>
+          <Droppable 
+              types={['food']} 
+              onDrop={this.onDrop.bind(this)}>
+              <ul className={classnames('Container', className)}>
+                {angry} {hungry} {sleep}
+                <div className={classnames('Image', className)}>
+                  <img src={backgroundImg} alt="background" />
+                </div>
+                <div className={classnames('Overlay', className)}>
+                  <img src={dinoImg} alt="dino" />
+                </div>
+                <div className={classnames('Overlay', className)}>
+                  <img src={foreground} alt="foreground" />
+                </div> 
+              </ul>
+          </Droppable>
+        </div>   
       </div>
     );
   }
